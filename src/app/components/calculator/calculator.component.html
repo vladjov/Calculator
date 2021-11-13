@@ -1,0 +1,46 @@
+<div class="calculator">
+  <main>
+    <header>
+      <button (click)="toggleHistory($event)" class="historyBtn">History</button>
+    </header>
+    
+    <div id="mainDisplay">
+      <div id="subDisplay">
+        <input  name="text" [(ngModel)]="val" placeholder=""/>
+      </div>
+      <input  name="text" [(ngModel)]="evaluate" placeholder="0"/>
+    </div>
+    
+    <div id="keypad">
+      <div id="symbolsDiv">
+        <button *ngFor="let symbol of symbols" (click)="onBtnClick(symbol)" class="btn symbolBtn" >{{symbol}}</button>
+      </div>
+  
+      <div id="operationsDiv">
+        <button *ngFor="let operation of operations" (click)="onBtnClick(operation)" class="btn operationBtn" >{{operation}}</button>
+      </div>
+    
+      <div id="digitsDiv">
+        <button *ngFor="let digit of digits" (click)="onBtnClick(digit)" class="btn digitBtn" >{{digit}}</button>
+      </div>
+    </div>
+  </main>
+  
+  
+  <aside *ngIf="showHistoryContainer" id="historyContainer">
+    <h3 class="historyHeading">History
+      <span *ngIf="expressionsHistory.length === 0" class="historyEmpty">
+        is currently empty.
+      </span>
+    </h3>
+    
+    <div class="historyList">
+      <div *ngFor="let expression of expressionsHistory; index as i" (click)="selectFromHistory($event)" class="historyItem" id={{i}}>
+        {{ expression }}
+      </div>
+    </div>
+    
+    <button (click)="clearHistory($event)" class="clearHistoryBtn">Clear</button>
+  </aside>
+  
+</div>
